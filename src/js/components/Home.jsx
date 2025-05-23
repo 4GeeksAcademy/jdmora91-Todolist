@@ -1,28 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import EntradaTarea from "./EntradaTarea";
+import ListaTareas from "./ListaTarea";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
 
-//create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-            
+  const [tareas, setTareas] = useState([]);
 
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  const agregarTarea = (tarea) => {
+    if (tarea.trim() !== "") {
+      setTareas([...tareas, tarea]);
+    }
+  };
+
+  const eliminarTarea = (index) => {
+    const nuevasTareas = tareas.filter((_, i) => i !== index);
+    setTareas(nuevasTareas);
+  };
+
+  return (
+    <div className="container mt-5 bg-light p-4 rounded">
+      <h1 className="text-center text-info fs-huge display-4">Lista de Tareas</h1>
+      <div className="card shadow mx-auto" style={{ maxWidth: "500px" }}>
+        <EntradaTarea onAgregar={agregarTarea} />
+        <ListaTareas tareas={tareas} onEliminar={eliminarTarea} className="list-group" />
+        <div className="card-footer text-muted">
+          {tareas.length === 0
+            ? "No hay tareas, añadir tareas"
+            : `${tareas.length} tarea${tareas.length !== 1 ? "s" : ""} restante${tareas.length !== 1 ? "s" : ""}`}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Home;
