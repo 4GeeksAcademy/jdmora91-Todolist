@@ -19,11 +19,11 @@ const Home = () => {
 
   return (
     <div className="container mt-5 bg-light p-4 rounded">
-      <h1 className="text-center text-info fs-huge display-4">Lista de Tareas</h1>
-      <div className="card shadow mx-auto" style={{ maxWidth: "500px" }}>
+      <h1 className="text-center fs-1 display-4 fw-bolder text-dark">Lista de Tareas</h1>
+      <div className="card shadow-m p-3 mb-5 bg-light rounded mx-auto " style={{ maxWidth: "500px" }}>
         <EntradaTarea onAgregar={agregarTarea} />
         <ListaTareas tareas={tareas} onEliminar={eliminarTarea} className="list-group" />
-        <div className="card-footer text-muted">
+        <div className="card-footer text-white bg-primary ">
           {tareas.length === 0
             ? "No hay tareas, añadir tareas"
             : `${tareas.length} tarea${tareas.length !== 1 ? "s" : ""} restante${tareas.length !== 1 ? "s" : ""}`}
